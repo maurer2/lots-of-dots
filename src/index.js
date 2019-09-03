@@ -18,8 +18,13 @@ fs.readFile('./src/stage.png')
     });
 
     parsedPNG
-      .then((dataParsed) => {
-        console.error(dataParsed);
+      .then((pngFile) => {
+        console.error(pngFile.data);
+        const y = 100;
+        for (let x = 0; x < pngFile.width; x++) {
+          console.error(pngFile.data[x * y]);
+        }
+
       })
       .catch((error) => console.error(error));
   })
