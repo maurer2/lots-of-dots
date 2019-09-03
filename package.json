@@ -9,9 +9,12 @@
     "eslint": "^6.3.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
-    "esm": "^3.2.25"
+    "esm": "^3.2.25",
+    "fs-extra": "^8.1.0",
+    "pngjs": "^3.4.0"
   },
   "scripts": {
+    "start": "node -r esm ./src/index.js",
     "lint": "eslint './src/**/*.js'"
   }
 }
