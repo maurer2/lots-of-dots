@@ -23,12 +23,28 @@
     }
 
     .indicator {
+      --animation-name: opacity-fade-in;
+      --index: calc(sibling-index() - 1);
+      --delay-of-current-item: calc(
+        var(--animation-duration) / sibling-count()
+      );
+
+      /* --animation-name: if(
+        style(--index > 3): opacity-fade-in; else: opacity-fade-out
+      ); */
+
+      /* doesn't work */
+      /* --percent-completion: calc(calc(var(--index) * 100) / sibling-count()); */
+      /* --animation-name: if(
+        style(--percent-completion > 50): opacity-fade-in; else:
+          opacity-fade-out
+      ); */
+
       aspect-ratio: 1;
       border: 1px solid currentColor;
-      animation: opacity-fade-in var(--animation-duration) ease-in-out infinite;
-      animation-delay: calc(
-        (sibling-index()) * calc(var(--animation-duration) / sibling-count())
-      );
+      animation: var(--animation-name) var(--animation-duration) ease-in-out
+        infinite alternate;
+      animation-delay: calc(var(--index) * var(--delay-of-current-item));
       background: var(--highlight-not-subtle);
     }
   }

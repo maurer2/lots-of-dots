@@ -10,7 +10,7 @@
     --highlight-subtle: oklch(0.9 0.01 280);
     --highlight-not-subtle: oklch(0.628 0.2577 29.23);
 
-    --animation-duration: 0.5s;
+    --animation-duration: 0.75s;
     @media screen and (prefers-reduced-motion: reduce) {
       --animation-duration: 0s;
     }
@@ -33,8 +33,21 @@
 @keyframes opacity-fade-in {
   from {
     opacity: 0;
+    scale: 0;
   }
   to {
     opacity: 1;
+    scale: 1;
+  }
+}
+
+@keyframes opacity-fade-out {
+  from {
+    opacity: 1;
+    scale: 1;
+  }
+  to {
+    opacity: 0;
+    scale: 0;
   }
 }
