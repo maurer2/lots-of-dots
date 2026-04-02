@@ -13,6 +13,8 @@
   body {
     min-block-size: 100svh;
     inline-size: min(100%, 100ch);
+    margin-inline: auto;
+    margin-block-start: 1rem;
   }
 }
 
@@ -20,4 +22,13 @@
 }
 
 @layer utilities {
+}
+
+@keyframes opacity-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
