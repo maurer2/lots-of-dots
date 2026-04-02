@@ -1,20 +1,21 @@
 {
   "name": "lots-of-dots",
-  "version": "1.0.0",
-  "main": "index.js",
-  "repository": "git@github.com:maurer2/lots-of-dots.git",
-  "author": "Martin",
-  "license": "MIT",
-  "dependencies": {
-    "eslint": "^6.3.0",
-    "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.18.2",
-    "esm": "^3.2.25",
-    "fs-extra": "^8.1.0",
-    "pngjs": "^3.4.0"
-  },
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "start": "node -r esm ./src/index.js",
-    "lint": "eslint './src/**/*.js'"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^7.0.0",
+    "@tsconfig/svelte": "^5.0.8",
+    "@types/node": "^24.12.0",
+    "svelte": "^5.53.12",
+    "svelte-check": "^4.4.5",
+    "typescript": "~5.9.3",
+    "vite": "^8.0.1"
   }
 }
