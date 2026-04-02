@@ -1,89 +1,42 @@
 <script>
-  import svelteLogo from './assets/svelte.svg'
-  import viteLogo from './assets/vite.svg'
-  import heroImg from './assets/hero.png'
-  import Counter from './lib/Counter.svelte'
+  import Dots from "./lib/components/Dots/Dots.svelte";
+  // import NumberStepper from "./lib/components/NumberStepper/NumberStepper.svelte";
+
+  const defaultNumberOfDots = 5;
+  let numberOfDots = $state(defaultNumberOfDots);
 </script>
 
-<section id="center">
-  <div class="hero">
-    <img src={heroImg} class="base" width="170" height="179" alt="" />
-    <img src={svelteLogo} class="framework" alt="Svelte logo" />
-    <img src={viteLogo} class="vite" alt="Vite logo" />
-  </div>
-  <div>
-    <h1>Get started</h1>
-    <p>Edit <code>src/App.svelte</code> and save to test <code>HMR</code></p>
-  </div>
-  <Counter />
-</section>
+<main>
+  <section aria-label="Dots">
+    <Dots count={numberOfDots} />
+  </section>
 
-<div class="ticks"></div>
+  <section>
+    <h2 id="contact-heading">Controls</h2>
 
-<section id="next-steps">
-  <div id="docs">
-    <svg class="icon" role="presentation" aria-hidden="true">
-      <use href="/icons.svg#documentation-icon"></use>
-    </svg>
-    <h2>Documentation</h2>
-    <p>Your questions, answered</p>
-    <ul>
-      <li>
-        <a href="https://vite.dev/" target="_blank" rel="noreferrer">
-          <img class="logo" src={viteLogo} alt="" />
-          Explore Vite
-        </a>
-      </li>
-      <li>
-        <a href="https://svelte.dev/" target="_blank" rel="noreferrer">
-          <img class="button-icon" src={svelteLogo} alt="" />
-          Learn more
-        </a>
-      </li>
-    </ul>
-  </div>
-  <div id="social">
-    <svg class="icon" role="presentation" aria-hidden="true">
-      <use href="/icons.svg#social-icon"></use>
-    </svg>
-    <h2>Connect with us</h2>
-    <p>Join the Vite community</p>
-    <ul>
-      <li>
-        <a href="https://github.com/vitejs/vite" target="_blank" rel="noreferrer">
-          <svg class="button-icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#github-icon"></use>
-          </svg>
-          GitHub
-        </a>
-      </li>
-      <li>
-        <a href="https://chat.vite.dev/" target="_blank" rel="noreferrer">
-          <svg class="button-icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#discord-icon"></use>
-          </svg>
-          Discord
-        </a>
-      </li>
-      <li>
-        <a href="https://x.com/vite_js" target="_blank" rel="noreferrer">
-          <svg class="button-icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#x-icon"></use>
-          </svg>
-          X.com
-        </a>
-      </li>
-      <li>
-        <a href="https://bsky.app/profile/vite.dev" target="_blank" rel="noreferrer">
-          <svg class="button-icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#bluesky-icon"></use>
-          </svg>
-          Bluesky
-        </a>
-      </li>
-    </ul>
-  </div>
-</section>
+    <div role="group" aria-label="Dots control">
+      <output for="button-plus-one button-plus-ten button-reset"
+        >{numberOfDots}</output
+      >
 
-<div class="ticks"></div>
-<section id="spacer"></section>
+      <button
+        type="button"
+        id="button-plus-one"
+        aria-label="Increade count by 1"
+        onclick={() => (numberOfDots = numberOfDots + 1)}>+1</button
+      >
+      <button
+        type="button"
+        id="button-plus-ten"
+        aria-label="Increade count by 10"
+        onclick={() => (numberOfDots = numberOfDots + 10)}>+10</button
+      >
+      <button
+        type="button"
+        id="button-reset"
+        aria-label="Reset count"
+        onclick={() => (numberOfDots = defaultNumberOfDots)}>Reset</button
+      >
+    </div>
+  </section>
+</main>
