@@ -1,66 +1,40 @@
 <script lang="ts">
-  import Dots from "./lib/components/Dots/Dots.svelte";
-  // import NumberStepper from "./lib/components/NumberStepper/NumberStepper.svelte";
+  import Indicators from "./lib/components/Indicators/Indicators.svelte";
+  import Controls from "./lib/components/Controls/Controls.svelte";
 
-  const defaultNumberOfDots = 5;
-  let numberOfDots = $state(defaultNumberOfDots);
+  const defaultNumberOfIndicators = 5;
+  let numberOfIndicators = $state(defaultNumberOfIndicators);
 
-  function changeNumber(newCount: typeof numberOfDots) {
-    numberOfDots += newCount;
-  }
-
-  function reset() {
-    numberOfDots = defaultNumberOfDots;
-  }
+  const hasReducedMotionEnabled = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
 </script>
 
 <main class="main">
-  <section aria-label="Dots">
-    <Dots count={numberOfDots} />
+  <header>
+    <h1>Lots of <s>Dots</s> Indicators</h1>
+    <p>Checking out "sibling-index()" and "sibling-count()".</p>
+    {#if hasReducedMotionEnabled}
+      <p role="status">Warning, animations are currently disabled.</p>
+    {/if}
+  </header>
+
+  <section>
+    <h2 id="controls">Controls</h2>
+    <Controls bind:count={numberOfIndicators} {defaultNumberOfIndicators}
+    ></Controls>
   </section>
 
   <section>
-    <h2 id="contact-heading">Controls</h2>
-
-    <div role="group" aria-label="Dots control" class="control-strip">
-      <output
-        for="button-plus-one button-plus-ten button-reset"
-        class="current-value-indicator">{numberOfDots}</output
-      >
-
-      <button
-        type="button"
-        id="button-plus-one"
-        aria-label="Increase count by 1"
-        onclick={() => changeNumber(1)}>+1</button
-      >
-      <button
-        type="button"
-        id="button-plus-ten"
-        aria-label="Increase count by 10"
-        onclick={() => changeNumber(10)}>+10</button
-      >
-      <button
-        type="button"
-        id="button-reset"
-        aria-label="Reset count"
-        onclick={() => reset()}>Reset</button
-      >
-    </div>
+    <h2 id="indicators">Indicators</h2>
+    <Indicators count={numberOfIndicators} />
   </section>
 </main>
 
 <style>
   @layer components {
-    .control-strip {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .current-value-indicator {
-      padding-inline: 1rem;
-      align-content: center;
-      border: 1px solid currentColor;
+    .main {
+      display: flow-root;
     }
   }
 </style>

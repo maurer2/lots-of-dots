@@ -7,11 +7,17 @@
     --bg: oklch(0.98 0.01 280);
     --text: oklch(0.45 0.03 280);
     --highlight: oklch(0.62 0.2 275);
-    --subtle: oklch(0.9 0.01 280);
+    --highlight-subtle: oklch(0.9 0.01 280);
+    --highlight-not-subtle: oklch(0.628 0.2577 29.23);
+
+    --animation-duration: 0.5s;
+    @media screen and (prefers-reduced-motion: reduce) {
+      --animation-duration: 0s;
+    }
   }
 
   body {
-    min-block-size: 100svh;
+    min-block-size: 100svb;
     inline-size: min(100%, 100ch);
     margin-inline: auto;
     margin-block-start: 1rem;
