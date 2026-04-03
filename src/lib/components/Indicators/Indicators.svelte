@@ -24,15 +24,20 @@
 
     .indicator {
       --animation-name: opacity-fade-in;
-      --index: calc(sibling-index() - 1);
-      --delay-of-current-item: calc(
-        var(--animation-duration) / sibling-count()
-      );
+      /* --index: calc(sibling-index() - 1); */
+      /* --delay-per-item: calc(var(--animation-duration) / sibling-count()); */ /*  speed increases with every new item */
+      --fraction-of-total: calc(
+        (sibling-index() - 1) / sibling-count()
+      ); /*  0-1 */
+
+      /* missing brackets causes alternating animation */
+      /* --fraction-of-total: calc(
+        sibling-index() - 1 / sibling-count()
+      );  */
 
       /* --animation-name: if(
         style(--index > 3): opacity-fade-in; else: opacity-fade-out
       ); */
-
       /* doesn't work */
       /* --percent-completion: calc(calc(var(--index) * 100) / sibling-count()); */
       /* --animation-name: if(
@@ -41,10 +46,12 @@
       ); */
 
       aspect-ratio: 1;
-      border: 1px solid currentColor;
       animation: var(--animation-name) var(--animation-duration) ease-in-out
         infinite alternate;
-      animation-delay: calc(var(--index) * var(--delay-of-current-item));
+      /* animation-delay: calc(var(--index) * var(--delay-per-item)); */
+      animation-delay: calc(
+        var(--fraction-of-total) * var(--animation-duration)
+      );
       background: var(--highlight-not-subtle);
     }
   }

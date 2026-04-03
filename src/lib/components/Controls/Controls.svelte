@@ -1,17 +1,16 @@
 <script lang="ts">
   type ControlsProps = {
     count: number;
-    defaultNumberOfIndicators: number;
+    defaultCount: number;
   };
-  let { count = $bindable(5), defaultNumberOfIndicators = 5 }: ControlsProps =
-    $props();
+  let { count = $bindable(0), defaultCount = 0 }: ControlsProps = $props();
 
-  function changeNumber(newCount: typeof count) {
+  function changeCount(newCount: typeof count) {
     count += newCount;
   }
 
-  function reset() {
-    count = defaultNumberOfIndicators;
+  function resetCount() {
+    count = defaultCount;
   }
 </script>
 
@@ -20,36 +19,19 @@
     for="button-plus-one button-plus-ten button-plus-hundert button-reset"
     class="current-value-indicator">{count}</output
   >
-
-  <button
-    type="button"
-    id="button-plus-one"
-    aria-label="Increase count by 1"
-    onclick={() => changeNumber(1)}>+1</button
-  >
-  <button
-    type="button"
-    id="button-plus-ten"
-    aria-label="Increase count by 10"
-    onclick={() => changeNumber(10)}>+10</button
-  >
-  <button
-    type="button"
-    id="button-plus-hundert"
-    aria-label="Increase count by 100"
-    onclick={() => changeNumber(100)}>+100</button
-  >
-  <button
-    type="button"
-    id="button-plus-thousand"
-    aria-label="Increase count by 1000"
-    onclick={() => changeNumber(1000)}>+1000</button
-  >
+  {#each [1, 10, 100, 1000] as increment}
+    <button
+      type="button"
+      id={`button-plus-${increment}`}
+      aria-label={`Increase count by ${increment}`}
+      onclick={() => changeCount(increment)}>+{increment}</button
+    >
+  {/each}
   <button
     type="button"
     id="button-reset"
     aria-label="Reset count"
-    onclick={() => reset()}>Reset</button
+    onclick={() => resetCount()}>Reset</button
   >
 </div>
 

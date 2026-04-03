@@ -15,13 +15,18 @@
     <h1>Lots of <s>Dots</s> Indicators</h1>
     <p>Checking out "sibling-index()" and "sibling-count()".</p>
     {#if hasReducedMotionEnabled}
-      <p role="status">Warning, animations are currently disabled.</p>
+      <p role="status">
+        Warning, animations are currently disabled owing to reduced motion
+        preferences.
+      </p>
     {/if}
   </header>
 
   <section>
     <h2 id="controls">Controls</h2>
-    <Controls bind:count={numberOfIndicators} {defaultNumberOfIndicators}
+    <Controls
+      bind:count={numberOfIndicators}
+      defaultCount={defaultNumberOfIndicators}
     ></Controls>
   </section>
 
