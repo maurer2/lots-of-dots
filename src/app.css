@@ -16,11 +16,40 @@
     }
   }
 
+  html {
+    /* https://frontendmasters.com/blog/super-simple-full-bleed-breakout-styles/ */
+    container: document / inline-size;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
   body {
+    --container-width: min(100%, 100ch);
+    --container-width-full-bleed: 100cqw;
+
+    display: grid;
     min-block-size: 100svb;
-    inline-size: min(100%, 100ch);
-    margin-inline: auto;
-    margin-block-start: 1rem;
+    grid-template-columns: var(--container-width);
+    grid-auto-rows: max-content;
+    /* inline-size: min(100%, 100ch); */
+    /* margin-inline: auto; */
+    justify-content: center;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+
+  #app {
+    display: contents;
   }
 }
 
@@ -28,6 +57,18 @@
 }
 
 @layer utilities {
+  .container {
+    inline-size: var(--container-width);
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  .container--full-bleed {
+    inline-size: var(--container-width-full-bleed);
+    margin-inline-start: calc(
+      50% - 50cqw
+    ); /* move to the left corner; 50% of centre column - half of screen width = space between left corner and centre column */
+  }
 }
 
 @keyframes opacity-fade-in {

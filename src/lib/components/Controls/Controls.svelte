@@ -40,12 +40,16 @@
     .control-strip {
       display: flex;
       gap: 0.5rem;
+      flex-wrap: wrap;
     }
 
     .current-value-indicator {
-      padding-inline: 1rem;
+      min-inline-size: 6ch;
+      min-inline-size: calc-size(4ch, size + 2rem);
       align-content: center;
       border: 1px solid currentColor;
+      font-variant-numeric: tabular-nums;
+      text-align: center;
     }
   }
 </style>
