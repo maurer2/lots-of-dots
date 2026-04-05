@@ -82,7 +82,7 @@
   }
 }
 
-@keyframes opacity-fade-out {
+/* @keyframes opacity-fade-out {
   from {
     opacity: 1;
     scale: 1;
@@ -91,4 +91,4 @@
     opacity: 0;
     scale: 0;
   }
-}
+} */

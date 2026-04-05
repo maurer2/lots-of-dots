@@ -15,11 +15,14 @@
 
 <style>
   @layer components {
+    /* Flexbox: can centre the last row, but can't keep item widths consistent across all rows when flex grow is enabled to fill each row */
+    /* Grid: can keep item widths consistent across all rows when filling up each row but can't centre items in the last row */
+
     .indicators {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, 1rem);
-      grid-auto-rows: 1rem;
+      display: flex;
+      flex-wrap: wrap;
       gap: 0.5rem;
+      justify-content: center;
     }
 
     .indicator {
@@ -45,7 +48,11 @@
           opacity-fade-out
       ); */
 
+      width: 1rem;
+      flex: none;
       aspect-ratio: 1;
+      opacity: 0;
+      scale: 0;
       animation: var(--animation-name) var(--animation-duration) ease-in-out
         infinite alternate;
       /* animation-delay: calc(var(--index) * var(--delay-per-item)); */

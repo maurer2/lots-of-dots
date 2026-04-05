@@ -14,7 +14,11 @@
   }
 </script>
 
-<div role="group" aria-label="Dots control" class="control-strip">
+<div
+  role="group"
+  aria-label="Controls for number of Indicators"
+  class="control-strip"
+>
   <output
     for="button-plus-one button-plus-ten button-plus-hundert button-reset"
     class="current-value-indicator">{count}</output
@@ -27,11 +31,8 @@
       onclick={() => changeCount(increment)}>+{increment}</button
     >
   {/each}
-  <button
-    type="button"
-    id="button-reset"
-    aria-label="Reset count"
-    onclick={() => resetCount()}>Reset</button
+  <button type="button" id="button-reset" onclick={() => resetCount()}
+    >Reset count to {defaultCount}</button
   >
 </div>
 
