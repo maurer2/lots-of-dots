@@ -12,11 +12,22 @@
   function resetCount() {
     count = defaultCount;
   }
+
+  let prevCount = $state(count);
+  // store old value for next render, when props count gets updated again
+  // same value on first render
+  $effect(() => {
+    const currentCount = count;
+
+    return () => {
+      prevCount = currentCount;
+    };
+  });
 </script>
 
 <div
   role="group"
-  aria-label="Controls for number of Indicators"
+  aria-label="Controls for number of indicators"
   class="control-strip"
 >
   <!-- Trigger animation restart when count changes -->
@@ -24,7 +35,8 @@
     <output
       for="button-plus-one button-plus-ten button-plus-hundert button-reset"
       class="current-value-indicator"
-      style="--current-count:{count}"
+      style:--current-count={count}
+      style:--previous-count={prevCount}
     >
       <span class="sr-only">
         {count}
@@ -39,7 +51,7 @@
       onclick={() => changeCount(increment)}>+{increment}</button
     >
   {/each}
-  <button type="button" id="button-reset" onclick={() => resetCount()}
+  <button type="button" id="button-reset" onclick={resetCount}
     >Reset count to {defaultCount}</button
   >
 </div>
@@ -60,8 +72,7 @@
       font-variant-numeric: tabular-nums;
       text-align: center;
 
-      /* https://www.linkedin.com/posts/utsavmeena_how-to-animate-numbers-in-css-without-activity-7468670578418204672-f0ah */
-      animation: count-up 0.5s linear forwards;
+      animation: change-count 0.25s linear forwards;
       counter-reset: value var(--counter);
 
       &:before {
