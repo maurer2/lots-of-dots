@@ -2,6 +2,12 @@
 
 @import "modern-normalize" layer(reset);
 
+@property --counter {
+  syntax: "<integer>";
+  initial-value: 0;
+  inherits: false;
+}
+
 @layer base {
   :root {
     --bg: oklch(0.98 0.01 280);
@@ -69,6 +75,15 @@
       50% - 50cqw
     ); /* move to the left corner; 50% of centre column - half of screen width = space between left corner and centre column */
   }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
 }
 
 @keyframes opacity-fade-in {
@@ -81,6 +96,13 @@
     scale: 1;
   }
 }
+
+/* todo: start from old current value */
+@keyframes count-up {
+  from { --counter: 0; }
+  to { --counter: var(--current-count); }
+}
+
 
 /* @keyframes opacity-fade-out {
   from {

@@ -19,10 +19,18 @@
   aria-label="Controls for number of Indicators"
   class="control-strip"
 >
-  <output
-    for="button-plus-one button-plus-ten button-plus-hundert button-reset"
-    class="current-value-indicator">{count}</output
-  >
+  <!-- Trigger animation restart when count changes -->
+  {#key count}
+    <output
+      for="button-plus-one button-plus-ten button-plus-hundert button-reset"
+      class="current-value-indicator"
+      style="--current-count:{count}"
+    >
+      <span class="sr-only">
+        {count}
+      </span>
+    </output>
+  {/key}
   {#each [1, 10, 100, 1000] as increment}
     <button
       type="button"
@@ -51,6 +59,14 @@
       border: 1px solid currentColor;
       font-variant-numeric: tabular-nums;
       text-align: center;
+
+      /* https://www.linkedin.com/posts/utsavmeena_how-to-animate-numbers-in-css-without-activity-7468670578418204672-f0ah */
+      animation: count-up 0.5s linear forwards;
+      counter-reset: value var(--counter);
+
+      &:before {
+        content: counter(value);
+      }
     }
   }
 </style>
