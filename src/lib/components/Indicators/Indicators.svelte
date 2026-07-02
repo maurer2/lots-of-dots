@@ -6,9 +6,18 @@
 </script>
 
 {#key count}
-  <div role="status" aria-label="Loading" class="indicators">
-    {#each { length: count }}
-      <span aria-hidden="true" class="indicator"></span>
+  <div
+    role="status"
+    aria-label="Loading"
+    class="indicators"
+    style="--number-of-columns: {count}"
+  >
+    {#each { length: count, index: 0 } as _, index}
+      <span
+        aria-hidden="true"
+        class="indicator"
+        style="--index-of-column: {index}"
+      ></span>
     {/each}
   </div>
 {/key}
@@ -28,10 +37,13 @@
     .indicator {
       --animation-name: opacity-fade-in;
       /* --index: calc(sibling-index() - 1); */
-      /* --delay-per-item: calc(var(--animation-duration) / sibling-count()); */ /*  speed increases with every new item */
+      /* --delay-per-item: calc(var(--animation-duration) / sibling-count()); */ /* speed increases with every new item */
       --fraction-of-total: calc(
-        (sibling-index() - 1) / sibling-count()
-      ); /*  0-1 */
+        var(--index-of-column) / var(--number-of-columns)
+      ); /*  0-1 range */
+      @supports (z-index: sibling-index()) {
+        --fraction-of-total: calc((sibling-index() - 1) / sibling-count());
+      }
 
       /* missing brackets causes alternating animation */
       /* --fraction-of-total: calc(
