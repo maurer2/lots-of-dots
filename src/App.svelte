@@ -42,10 +42,7 @@
     .header {
       /* border-block-end: 1px solid currentColor; */
       background: var(--text);
-      color: oklch(100% 0 0);
-      /* @supports (color: contrast-color(var(--text))) {
-        color: contrast-color(var(--text));
-      } */
+      color: contrast-color(var(--text));
     }
 
     .main {

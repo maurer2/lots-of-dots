@@ -22,7 +22,7 @@
     }
   }
 
-  html {
+  :where(html) {
     /* https://frontendmasters.com/blog/super-simple-full-bleed-breakout-styles/ */
     container: document / inline-size;
     background: var(--bg);
@@ -31,7 +31,7 @@
     overflow-y: scroll;
   }
 
-  body {
+  :where(body) {
     --container-width: min(100%, 100ch);
     --container-width-full-bleed: 100cqw;
 
@@ -44,12 +44,7 @@
     justify-content: center;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  :where(h1,h2,h3,h4,h5,h6) {
     text-box-trim: trim-both;
     text-box-edge: cap alphabetic;
   }
