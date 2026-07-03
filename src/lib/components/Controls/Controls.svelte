@@ -4,6 +4,10 @@
     defaultCount: number;
   };
   let { count = $bindable(0), defaultCount = 0 }: ControlsProps = $props();
+  const isSupportingTypedAttr = CSS.supports(
+    "z-index",
+    "attr(data-test type(<integer>))",
+  );
 
   function changeCount(newCount: typeof count) {
     count += newCount;
@@ -35,8 +39,12 @@
     <output
       for="button-plus-one button-plus-ten button-plus-hundert button-reset"
       class="current-value-indicator"
-      style:--current-count={count}
-      style:--previous-count={prevCount}
+      // style:--current-count={count}
+      // style:--previous-count={prevCount}
+      style:--current-count={isSupportingTypedAttr ? undefined : count}
+      style:--previous-count={isSupportingTypedAttr ? undefined : prevCount}
+      data-current-count={count}
+      data-previous-count={prevCount}
     >
       <span class="sr-only">
         {count}
@@ -65,13 +73,16 @@
     }
 
     .current-value-indicator {
+      /* both get ignored if type(<integer>) is not supported */
+      --current-count: attr(data-current-count type(<integer>));
+      --previous-count: attr(data-previous-count type(<integer>));
+
       min-inline-size: 6ch;
       min-inline-size: calc-size(4ch, size + 2rem);
       align-content: center;
       border: 1px solid currentColor;
       font-variant-numeric: tabular-nums;
       text-align: center;
-
       animation: change-count 0.25s linear forwards;
       counter-reset: value var(--counter);
 
